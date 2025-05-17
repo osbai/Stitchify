@@ -1,9 +1,8 @@
 # Stitchify: turn any image into an artistic cross-stitch
 
 
-- A web app: front end (HTML, JS)
-- Backend ?
-- Load an image, it is turned into a cross stitch
+- A Flask web app
+- Upload an image, it is then turned into a cross stitch
 
 ## To run the flask app locally
 
