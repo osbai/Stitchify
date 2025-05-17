@@ -12,3 +12,5 @@
 `flask --app app run`
 or
 `python app.py
+
+![alt text](images/screenshot.png)
