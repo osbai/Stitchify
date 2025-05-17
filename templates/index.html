@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cross-Stitch Pattern Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image</h1>
+        <form id="uploadForm">
+            <input type="file" name="image" accept="image/*" required><br>
+            <label>Number of Colors:</label>
+            <input type="number" name="colors" min="2" max="256" required><br>
+            <label>Number of Rows:</label>
+            <input type="number" name="rows" min="10" max="500" required><br>
+            <button type="submit">Generate Pattern</button>
+        </form>
+
+        <div id="output" style="margin-top: 20px;">
+            <h2>Processed Image</h2>
+            <img id="resultImage" src="" alt="Processed Image" style="max-width:100%;">
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            const response = await fetch('/process', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('resultImage').src = `/static/${result.output}?t=${Date.now()}`;
+        });
+    </script>
+</body>
+</html>
+
