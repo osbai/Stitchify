@@ -26,6 +26,12 @@ jobs:
       run: |
         pytest
 
+    - name: Log in to Heroku
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        echo "$HEROKU_API_KEY" | heroku auth:token
+
     - name: Deploy to Heroku
       if: github.ref == 'refs/heads/main'
       run: |
