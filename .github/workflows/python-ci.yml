@@ -26,7 +26,7 @@ jobs:
       run: |
         pytest
 
-    - name: Deploy to Heroku
+    - name: Deploy to Heroku1
       if: github.ref == 'refs/heads/main'
       run: |
         curl https://cli-assets.heroku.com/install.sh | sh
