@@ -26,6 +26,17 @@ jobs:
       run: |
         pytest
 
+    - name: Checkout full repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Heroku CLI
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
+        export PATH="$HOME/.local/share/heroku/bin:$PATH"
+
+
     # - name: Deploy to Heroku
     #   if: github.ref == 'refs/heads/main'
     #   run: |
@@ -37,5 +48,4 @@ jobs:
     - name: Push to Heroku
       run: |
         git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-        git fetch --all --unshallow
         git push heroku HEAD:main --force
