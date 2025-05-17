@@ -36,9 +36,6 @@ jobs:
       run: |
         pytest
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
     - name: Install Heroku CLI
       run: |
         curl https://cli-assets.heroku.com/install.sh | sh
