@@ -4,12 +4,23 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout full repo
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Lint with flake8
+      run: |
+        echo "Running flake8..."
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    - name: Check formatting with black
+      run: |
+        echo "Checking code formatting with black..."
+        black . --check
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -26,11 +37,9 @@ jobs:
       run: |
         pytest
 
-    - name: Checkout full repo
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
     - name: Install Heroku CLI
       run: |
         curl https://cli-assets.heroku.com/install.sh | sh

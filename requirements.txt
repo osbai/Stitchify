@@ -3,3 +3,5 @@ opencv-python
 numpy
 pytest
 gunicorn
+flake8
+black
