@@ -33,3 +33,8 @@ jobs:
     #     heroku auth:token
     #     heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
     #     git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git HEAD:main
+
+    - name: Push to Heroku
+      run: |
+        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+        git push heroku HEAD:main --force
